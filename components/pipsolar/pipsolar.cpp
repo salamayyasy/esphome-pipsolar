@@ -403,14 +403,16 @@ void Pipsolar::loop() {
       case POLLING_P004T:
         break;
       case POLLING_P013ED:
+        if (this->day_generated_energy_) {
+          this->day_generated_energy_->publish_state(value_day_generated_energy_);
+        }
+        this->state_ = STATE_IDLE;
         break;
       case POLLING_P005ET:
-        /*
         if (this->total_generated_energy_) {
           this->total_generated_energy_->publish_state(value_total_generated_energy_);
         }
         this->state_ = STATE_IDLE;
-        */
         break;
       case POLLING_P007PGS0:
         if (this->total_ac_output_apparent_power_) {
@@ -558,13 +560,13 @@ void Pipsolar::loop() {
         break;
       case POLLING_P013ED:
         ESP_LOGD(TAG, "Decode P0013ED");
+        sscanf(tmp, "^D%3d%08d", &ind, &value_day_generated_energy_);
+        this->state_ = STATE_POLL_DECODED;
         break;
       case POLLING_P005ET:
         ESP_LOGD(TAG, "Decode P005ET");
-        /*
         sscanf(tmp, "^D%3d%08d", &ind, &value_total_generated_energy_);
         this->state_ = STATE_POLL_DECODED;
-        */
         break;
       case POLLING_P007PGS0:
         ESP_LOGD(TAG, "Decode P007PGS0");
