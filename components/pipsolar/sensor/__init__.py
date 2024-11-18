@@ -340,9 +340,9 @@ TYPES = {
         accuracy_decimals=0,
         device_class=DEVICE_CLASS_CURRENT,
     ),
-    CONF_SYSTEM_TIME: datetime.date_schema(
-        system_time=CONF_DATE,
-    ),
+    ##CONF_SYSTEM_TIME: datetime.date_schema(
+    #    system_time=CONF_DATE,
+    #),
     CONF_DAY_GENERATED_Energy: sensor.sensor_schema(
         unit_of_measurement=UNIT_WATT_HOURS,
         icon=ICON_COUNTER,
