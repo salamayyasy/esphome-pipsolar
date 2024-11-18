@@ -713,7 +713,7 @@ uint8_t Pipsolar::send_next_command_() {
         if (command_str.find("^P013ED") == 0) {  
             char date_suffix[9];
             snprintf(date_suffix, sizeof(date_suffix), "%04d%02d%02d", 2024, 11,18);  // Replace with dynamic date logic
-            command += date_suffix;
+            command_str += date_suffix;
         }
 
         // Convert back to const char* for processing
