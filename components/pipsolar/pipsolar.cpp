@@ -702,7 +702,7 @@ uint8_t Pipsolar::check_incoming_crc_() {
 }
 
 // send next command used
-uint8_t Pipsolar::send_next_command_() {
+/*uint8_t Pipsolar::send_next_command_() {
     uint16_t crc16;
 
     if (this->command_queue_[this->command_queue_position_].length() != 0) {
@@ -747,7 +747,7 @@ uint8_t Pipsolar::send_next_command_() {
 
     return 0;
 }
-/*
+*/
 uint8_t Pipsolar::send_next_command_() {
   uint16_t crc16;
     uint8_t byte_command[16];
@@ -755,6 +755,7 @@ uint8_t Pipsolar::send_next_command_() {
     for (uint8_t i = 0; i < length; i++) {
       byte_command[i] = (uint8_t) this->command_queue_[this->command_queue_position_].at(i);
     }
+    ESP_LOGD(TAG, "Sending command from queue: %s with length %d", command, length);
     this->state_ = STATE_COMMAND;
     this->command_start_millis_ = millis();
     this->empty_uart_buffer_();
@@ -771,7 +772,6 @@ uint8_t Pipsolar::send_next_command_() {
   }
   return 0;
 }
-*/
 void Pipsolar::send_next_poll_() {
   uint16_t crc16;
   this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
