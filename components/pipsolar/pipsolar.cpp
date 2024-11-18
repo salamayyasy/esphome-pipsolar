@@ -551,8 +551,10 @@ void Pipsolar::loop() {
         break;
       
       case POLLING_P004T:
+        ESP_LOGD(TAG, "Decode P004T");
         break;
       case POLLING_P013ED:
+        ESP_LOGD(TAG, "Decode P0013ED");
         break;
       case POLLING_P005ET:
         ESP_LOGD(TAG, "Decode P005ET");
