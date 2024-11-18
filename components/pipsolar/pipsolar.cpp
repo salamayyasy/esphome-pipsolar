@@ -702,52 +702,6 @@ uint8_t Pipsolar::check_incoming_crc_() {
 }
 
 // send next command used
-/*uint8_t Pipsolar::send_next_command_() {
-    uint16_t crc16;
-
-    if (this->command_queue_[this->command_queue_position_].length() != 0) {
-        // Convert the command to std::string for easier manipulation
-        std::string command_str = this->command_queue_[this->command_queue_position_];
-
-        // Check if the command starts with "^P013ED"
-        if (command_str.find("^P013ED") == 0) {  
-            char date_suffix[9];
-            snprintf(date_suffix, sizeof(date_suffix), "%04d%02d%02d", 2024, 11,18);  // Replace with dynamic date logic
-            command_str += date_suffix;
-        }
-
-        // Convert back to const char* for processing
-        const char *command = command_str.c_str();
-
-        uint8_t byte_command[16];
-        uint8_t length = command_str.length();
-
-        for (uint8_t i = 0; i < length; i++) {
-            byte_command[i] = (uint8_t)command[i];
-        }
-
-        this->state_ = STATE_COMMAND;
-        this->command_start_millis_ = millis();
-        this->empty_uart_buffer_();
-        this->read_pos_ = 0;
-
-        crc16 = cal_crc_half_(byte_command, length);
-        this->write_str(command);
-
-        // Write checksum
-        this->write(((uint8_t)((crc16) >> 8)));   // High byte
-        this->write(((uint8_t)((crc16) & 0xff)));  // Low byte
-
-        // End byte
-        this->write(0x0D);
-
-        ESP_LOGD(TAG, "Sending command from queue: %s with length %d", command, length);
-        return 1;
-    }
-
-    return 0;
-}
-*/
 uint8_t Pipsolar::send_next_command_() {
   uint16_t crc16;
     uint8_t byte_command[16];
@@ -755,7 +709,7 @@ uint8_t Pipsolar::send_next_command_() {
     for (uint8_t i = 0; i < length; i++) {
       byte_command[i] = (uint8_t) this->command_queue_[this->command_queue_position_].at(i);
     }
-    ESP_LOGD(TAG, "Sending command from queue: %s with length %d", command, length);
+    //ESP_LOGD(TAG, "Sending command from queue: %s with length %d", command, length);
     this->state_ = STATE_COMMAND;
     this->command_start_millis_ = millis();
     this->empty_uart_buffer_();
@@ -772,6 +726,7 @@ uint8_t Pipsolar::send_next_command_() {
   }
   return 0;
 }
+
 void Pipsolar::send_next_poll_() {
   uint16_t crc16;
   this->last_polling_command_ = (this->last_polling_command_ + 1) % 15;
