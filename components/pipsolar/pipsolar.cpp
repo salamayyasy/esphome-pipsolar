@@ -410,6 +410,7 @@ void Pipsolar::loop() {
           this->total_generated_energy_->publish_state(value_total_generated_energy_);
         }
         this->state_ = STATE_IDLE;
+        */
         break;
       case POLLING_P007PGS0:
         if (this->total_ac_output_apparent_power_) {
@@ -425,7 +426,7 @@ void Pipsolar::loop() {
           this->total_battery_charging_current_->publish_state(value_total_battery_charging_current_);
         }
         this->state_ = STATE_IDLE;
-        */
+        
         break;
     }
   }
