@@ -710,7 +710,7 @@ uint8_t Pipsolar::send_next_command_() {
      // Check if the command is ^P013ED and append the date dynamically
         if (command.find("^P013ED") == 0) {  // Check if the command starts with "^P013ED"
             char date_suffix[9];
-            snprintf(date_suffix, sizeof(date_suffix), "%04d%02d%02d", 2024, 11,11);  // Replace with dynamic date logic
+            snprintf(date_suffix, sizeof(date_suffix), "%04d%02d%02d", 2024, 11, 11);  // Replace with dynamic date logic
             command += date_suffix;  // Append the date suffix (e.g., "202411")
         }
     uint8_t byte_command[16];
