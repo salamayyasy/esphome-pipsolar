@@ -91,6 +91,7 @@ CONF_TOTAL_OUTPUT_LOAD_PERCENT = "total_output_load_percent"
 CONF_TOTAL_BATTERY_CHARGING_CURRENT = "total_battery_charging_current"
 
 CONF_SYSTEM_TIME = "system_time"
+CONF_DAY_GENERATED_ENERGY = "day_generated_energy"
 
 TYPES = {
     CONF_GRID_RATING_VOLTAGE: sensor.sensor_schema(
@@ -341,6 +342,13 @@ TYPES = {
     ),
     CONF_SYSTEM_TIME: datetime.date_schema(
         
+    ),
+    CONF_DAY_GENERATED_Energy: sensor.sensor_schema(
+        unit_of_measurement=UNIT_WATT_HOURS,
+        icon=ICON_COUNTER,
+        accuracy_decimals=0,
+        device_class=DEVICE_CLASS_ENERGY,
+        state_class=STATE_CLASS_TOTAL_INCREASING,
     ),
 }
 
