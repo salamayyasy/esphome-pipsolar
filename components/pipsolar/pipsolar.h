@@ -17,8 +17,8 @@ enum ENUMPollingCommand {
   POLLING_P006MOD = 2,
   POLLING_P007FLAG = 3,
   POLLING_P005FWS = 4,
-  //            POLLING_QT = 5,
-  //            POLLING_QMN = 6,
+  POLLING_P004T = 5,
+  POLLING_P013ED = 6,
   POLLING_P007PGS0 = 10,
   POLLING_P005ET = 30,
 };
@@ -160,7 +160,7 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
   //            PIPSOLAR_TEXT_SENSOR(last_qpiws, P005FWS)
   //            PIPSOLAR_TEXT_SENSOR(last_qt, QT)
   //            PIPSOLAR_TEXT_SENSOR(last_qmn, QMN)
-
+  
   PIPSOLAR_SWITCH(output_source_priority_switch, P007PIRI)
   PIPSOLAR_SWITCH(solar_power_priority_switch, P007PIRI)
   PIPSOLAR_SWITCH(charger_source_priority_solarfirst_switch, P007PIRI)
