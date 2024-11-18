@@ -405,6 +405,7 @@ void Pipsolar::loop() {
       case POLLING_P013ED:
         break;
       case POLLING_P005ET:
+        /*
         if (this->total_generated_energy_) {
           this->total_generated_energy_->publish_state(value_total_generated_energy_);
         }
@@ -424,6 +425,7 @@ void Pipsolar::loop() {
           this->total_battery_charging_current_->publish_state(value_total_battery_charging_current_);
         }
         this->state_ = STATE_IDLE;
+        */
         break;
     }
   }
@@ -558,8 +560,10 @@ void Pipsolar::loop() {
         break;
       case POLLING_P005ET:
         ESP_LOGD(TAG, "Decode P005ET");
+        /*
         sscanf(tmp, "^D%3d%08d", &ind, &value_total_generated_energy_);
         this->state_ = STATE_POLL_DECODED;
+        */
         break;
       case POLLING_P007PGS0:
         ESP_LOGD(TAG, "Decode P007PGS0");
