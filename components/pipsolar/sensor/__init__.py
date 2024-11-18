@@ -1,6 +1,7 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import sensor
+from esphome.components import datetime
 from esphome.const import (
     CONF_BATTERY_VOLTAGE,
     CONF_BUS_VOLTAGE,
@@ -20,6 +21,7 @@ from esphome.const import (
     UNIT_VOLT_AMPS,
     UNIT_WATT,
     UNIT_WATT_HOURS,
+    CONF_DATE,
 )
 
 from .. import CONF_PIPSOLAR_ID, PIPSOLAR_COMPONENT_SCHEMA
@@ -87,6 +89,8 @@ CONF_TOTAL_AC_OUTPUT_APPARENT_POWER = "total_ac_output_apparent_power"
 CONF_TOTAL_AC_OUTPUT_ACTIVE_POWER = "total_ac_output_active_power"
 CONF_TOTAL_OUTPUT_LOAD_PERCENT = "total_output_load_percent"
 CONF_TOTAL_BATTERY_CHARGING_CURRENT = "total_battery_charging_current"
+
+CONF_SYSTEM_TIME = "system_time"
 
 TYPES = {
     CONF_GRID_RATING_VOLTAGE: sensor.sensor_schema(
@@ -334,6 +338,9 @@ TYPES = {
         unit_of_measurement=UNIT_AMPERE,
         accuracy_decimals=0,
         device_class=DEVICE_CLASS_CURRENT,
+    ),
+    CONF_SYSTEM_TIME: datetime.date_schema(
+        
     ),
 }
 
