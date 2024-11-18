@@ -402,7 +402,7 @@ void Pipsolar::loop() {
         break;
       case POLLING_P004T:
         break;
-      case POLLING_P0013ED:
+      case POLLING_P013ED:
         break;
       case POLLING_P005ET:
         if (this->total_generated_energy_) {
@@ -552,7 +552,7 @@ void Pipsolar::loop() {
       
       case POLLING_P004T:
         break;
-      case POLLING_P0013ED:
+      case POLLING_P013ED:
         break;
       case POLLING_P005ET:
         ESP_LOGD(TAG, "Decode P005ET");
