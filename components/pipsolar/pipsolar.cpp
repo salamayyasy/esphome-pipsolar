@@ -402,11 +402,7 @@ void Pipsolar::loop() {
         break;
       case POLLING_P004T:
         break;
-      case POLLING_P013ED:
-        if (this->day_generated_energy_) {
-          this->day_generated_energy_->publish_state(value_day_generated_energy_);
-        }
-        this->state_ = STATE_IDLE;
+      case POLLING_P0013ED:
         break;
       case POLLING_P005ET:
         if (this->total_generated_energy_) {
@@ -428,7 +424,6 @@ void Pipsolar::loop() {
           this->total_battery_charging_current_->publish_state(value_total_battery_charging_current_);
         }
         this->state_ = STATE_IDLE;
-        
         break;
     }
   }
@@ -556,12 +551,8 @@ void Pipsolar::loop() {
         break;
       
       case POLLING_P004T:
-        ESP_LOGD(TAG, "Decode P004T");
         break;
-      case POLLING_P013ED:
-        ESP_LOGD(TAG, "Decode P0013ED");
-        sscanf(tmp, "^D%3d%08d", &ind, &value_day_generated_energy_);
-        this->state_ = STATE_POLL_DECODED;
+      case POLLING_P0013ED:
         break;
       case POLLING_P005ET:
         ESP_LOGD(TAG, "Decode P005ET");
@@ -702,14 +693,16 @@ uint8_t Pipsolar::check_incoming_crc_() {
 }
 
 // send next command used
+
 uint8_t Pipsolar::send_next_command_() {
   uint16_t crc16;
+  if (this->command_queue_[this->command_queue_position_].length() != 0) {
+    const char *command = this->command_queue_[this->command_queue_position_].c_str();
     uint8_t byte_command[16];
     uint8_t length = this->command_queue_[this->command_queue_position_].length();
     for (uint8_t i = 0; i < length; i++) {
       byte_command[i] = (uint8_t) this->command_queue_[this->command_queue_position_].at(i);
     }
-    //ESP_LOGD(TAG, "Sending command from queue: %s with length %d", command, length);
     this->state_ = STATE_COMMAND;
     this->command_start_millis_ = millis();
     this->empty_uart_buffer_();
