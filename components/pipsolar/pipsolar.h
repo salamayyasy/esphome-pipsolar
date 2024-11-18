@@ -119,7 +119,9 @@ class Pipsolar : public uart::UARTDevice, public PollingComponent {
 
   PIPSOLAR_SENSOR(total_generated_energy, P005ET, int)
   //            PIPSOLAR_SENSOR(pv_power_balance, P007PIRI, int)
-
+  // tambah
+  PIPSOLAR_SENSOR(system_time, P004T,int)
+  PIPSOLAR_SENSOR(day_generated_energy,P013ED, int)
   // P006MOD values
   PIPSOLAR_VALUED_TEXT_SENSOR(device_mode, P006MOD, char)
 
